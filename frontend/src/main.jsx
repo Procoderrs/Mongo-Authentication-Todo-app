@@ -14,7 +14,7 @@ createRoot(root).render(
     <Toaster position='top-center'/>  
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Todos />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/todos" element={<Todos />} />
