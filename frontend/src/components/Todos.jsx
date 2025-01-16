@@ -180,7 +180,7 @@ const Todos = () => {
           <Profile/>
         </div>
 
-        <h1 className="text-blue-500 font-bold mb-4 text-4xl text-center">
+        <h1 className="text-blue-500 font-bold  text-4xl text-center">
           Todo-App
         </h1>
 
@@ -210,13 +210,11 @@ const Todos = () => {
         </form>
 
         {data?.length ? (
-          <div className="shadow-md border-2 border-input bg-transparent flex flex-col rounded">
+          <div className="shadow-md py-6 px-5  bg-pink-300 flex flex-col rounded">
             {data.map((todo, index) => (
               <div
                 key={index}
-                className={`flex h-10 items-center w-full bg-[#c5e0e8]  rounded-lg  px-5 py-8  mb-5 ${
-                  index === data.length - 1 ? 'border-b-0 '  : 'border-b-2 rounded-lg '
-                }`}
+                className={`flex h-10 items-center w-full bg-[#c5e0e8]  rounded-lg  px-5 py-9 mt-2 mb-2  `}
               >
                 <span
                   className={`flex-1 px-3 text-lg ${
