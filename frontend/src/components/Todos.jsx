@@ -194,7 +194,7 @@ const Todos = () => {
             value={currentTodo}
             onChange={(e) => setCurrentTodo(e.target.value)}
             required
-            className=" leading-6 py-4 h-12 text-left text-base shadow-md"
+            className=" leading-6 py-7 h-12 text-left text-base shadow-md"
           />
 
           <Button className="h-9 rounded-md border border-input px-4  py-7  text-base shadow-md flex items-center hover:bg-primary transition ease-linear group">
@@ -210,7 +210,7 @@ const Todos = () => {
         </form>
 
         {data?.length ? (
-          <div className="shadow-md py-6 px-5  bg-pink-300 flex flex-col rounded">
+          <div className=" py-6   flex flex-col rounded">
             {data.map((todo, index) => (
               <div
                 key={index}
