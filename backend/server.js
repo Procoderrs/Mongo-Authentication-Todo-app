@@ -26,9 +26,9 @@ app.use("/api/todos",TodoRoute)
 
 connectToDB();
 
-/* app.get("/",(req,res,next)=>{
+ app.get("/",(req,res,next)=>{
   res.send('heelllo world')
-}) */
+}) 
 
 //global errro handler
 app.use((err,req,res, next)=>{
