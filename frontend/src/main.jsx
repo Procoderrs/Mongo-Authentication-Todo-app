@@ -15,9 +15,9 @@ createRoot(root).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Todos />} />
+        <Route path="/todos" element={<Todos />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/todos" element={<Todos />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
