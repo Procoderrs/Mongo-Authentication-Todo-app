@@ -16,8 +16,10 @@ const [state,formAction,isPending]=useActionState(login,{
 })
 useEffect(()=>{
   if(state.success){
+    console.log('Login successful, redirecting...');
+    console.log('User logged in:', state.success);
     setTimeout(()=>{
-navigate('/')
+navigate('/todos')
 console.log(state.success)
     },2000)
 

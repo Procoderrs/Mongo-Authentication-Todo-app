@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Todos from './components/Todos'
 import Register from './components/Register';
 import Login from './components/Login';
@@ -14,9 +14,9 @@ createRoot(root).render(
     <Toaster position='top-center'/>  
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Todos />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/todos" element={<Todos />} />
-        <Route path="/Login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
