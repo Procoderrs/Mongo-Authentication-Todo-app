@@ -28,7 +28,7 @@ const Profile = () => {
   return (
   <DropdownMenu>
     <DropdownMenuTrigger>
-      <FontAwesomeIcon icon={faCircleUser} className='transition ease-in hover:cursor-pointer'/>
+      <FontAwesomeIcon icon={faCircleUser} className='transition ease-in hover:cursor-pointer size-7'/>
 <DropdownMenuContent>
   <DropdownMenuItem>
     Profile

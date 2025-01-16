@@ -169,8 +169,14 @@ const Todos = () => {
 
   return (
     <>
-      <div className="mx-auto mt-20 max-w-lg px-4 w-full flex flex-col gap-6">
-        <div className='flex justify-end'>
+
+    <div className='bg-blue-600 h-screen flex items-center justify-center'>
+
+    <div className=''>
+
+    
+      <div className="mx-auto   w-[800px] px-24 py-12 max-w-[820px] flex flex-col gap-6 bg-white rounded-lg ">
+        <div className='flex justify-end   '>
           <Profile/>
         </div>
 
@@ -178,7 +184,8 @@ const Todos = () => {
           Todo-App
         </h1>
 
-        <form onSubmit={handleAddOrUpdateTodo} className="flex gap-4 items-center">
+        <form onSubmit={handleAddOrUpdateTodo} className="flex gap-10 justify-center items-center">
+
           <Input
             type="text"
             placeholder="Enter todo"
@@ -187,10 +194,10 @@ const Todos = () => {
             value={currentTodo}
             onChange={(e) => setCurrentTodo(e.target.value)}
             required
-            className="shadow-md"
+            className=" leading-6 py-4 h-12 text-left text-base shadow-md"
           />
 
-          <Button className="h-9 rounded-md border border-input px-4 text-base shadow-md flex items-center hover:bg-primary transition ease-linear group">
+          <Button className="h-9 rounded-md border border-input px-4  py-7  text-base shadow-md flex items-center hover:bg-primary transition ease-linear group">
             <FontAwesomeIcon
               icon={faAdd}
               size={20}
@@ -207,12 +214,12 @@ const Todos = () => {
             {data.map((todo, index) => (
               <div
                 key={index}
-                className={`flex h-10 items-center w-full ${
-                  index === data.length - 1 ? 'border-b-0' : 'border-b-2'
+                className={`flex h-10 items-center w-full bg-[#c5e0e8]  rounded-lg  px-5 py-8  mb-5 ${
+                  index === data.length - 1 ? 'border-b-0 '  : 'border-b-2 rounded-lg '
                 }`}
               >
                 <span
-                  className={`flex-1 px-3 ${
+                  className={`flex-1 px-3 text-lg ${
                     todo.isCompleted ? 'line-through text-[#63657b]' : ''
                   }`}
                 >
@@ -220,19 +227,19 @@ const Todos = () => {
                 </span>
                 <div className="px-3 flex gap-2">
                   <FontAwesomeIcon
-                    className={`hover:text-blue-400 ${
+                    className={`bg-[#1d18a3] hover:bg-indigo-700 text-white px-2 py-2  size-4 rounded-lg cursor-pointer ${
                       todo.isCompleted ? 'text-primary' : 'text-slate-300'
                     }`}
                     icon={faCheck}
                     onClick={() => handleCompleteTodo(todo._id, todo.isCompleted)}
                   />
                   <FontAwesomeIcon
-                    className="iconHover"
+                    className="bg-[#1d18a3] hover:bg-indigo-700 text-white size-4 px-2 py-2 rounded-lg cursor-pointer"
                     icon={faTrash}
                     onClick={() => deleteTodo(todo._id)}
                   />
                   <FontAwesomeIcon
-                    className="iconHover"
+                    className="bg-[#1d18a3] size-4 hover:bg-indigo-700 text-white px-2 py-2 rounded-lg cursor-pointer"
                     icon={faEdit}
                     onClick={() => handleEdit(todo)}
                   />
@@ -244,6 +251,8 @@ const Todos = () => {
           <span>You don't have any todos</span>
         )}
       </div>
+      </div>
+      </div> 
     </>
   );
 };
