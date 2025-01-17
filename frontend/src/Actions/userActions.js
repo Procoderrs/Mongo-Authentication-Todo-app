@@ -29,8 +29,10 @@ export async function register(formData) {
 		console.log(email, password); // Debug the email and password
 
 		console.log("Sending request with:", { email, password }); // Add this line
+    console.log("Backend URL:", import.meta.env.VITE_BACKEND_URL);
+
 		const res = await fetch(
-			`${process.env.REACT_APP_BACKEND_URL}/api/user/register`,
+			import.meta.env.VITE_BACKEND_URL + "/api/user/register",
 			{
 				method: "POST",
 				headers: {
