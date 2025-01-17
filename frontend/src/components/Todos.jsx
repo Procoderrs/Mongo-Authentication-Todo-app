@@ -24,7 +24,7 @@ const fetcher = async (url, options = {}) => {
 
 const Todos = () => {
   const { data = [], error, mutate, isLoading } = useSWR(
-   `${process.env.REACT_APP_BACKEND_URL}/api/todos`,
+    import.meta.env.VITE_BACKEND_URL + "/api/todos",
     fetcher
   );
 
@@ -37,12 +37,10 @@ const Todos = () => {
   if (isLoading) {
     return <h1 className="text-2xl py-2 text-center">Loading...</h1>;
   }
-
   async function handleError(error) {
     toast.error(error);
     throw new Error(error);
   }
-
   async function handleAddOrUpdateTodo(e) {
     e.preventDefault();
 
@@ -55,7 +53,7 @@ const Todos = () => {
       // Update existing todo
       await mutate(
         async () => {
-          const response = await fetcher(`${process.env.REACT_APP_BACKEND_URL}/api/todos/${editingId}`, {
+          const response = await fetcher(import.meta.env.VITE_BACKEND_URL+ "/api/todos/${editingId}", {
             method: 'PUT',
             body: { title: currentTodo },
           });
@@ -88,7 +86,7 @@ const Todos = () => {
       };
 
       async function addTodo() {
-        const response = await fetcher(`${process.env.REACT_APP_BACKEND_URL}/api/todos`, {
+        const response = await fetcher(import.meta.env.VITE_BACKEND_URL+ "/api/todos", {
           method: 'POST',
           body: { title: currentTodo },
         });
@@ -114,7 +112,7 @@ const Todos = () => {
     toast.success('Todo deleted');
     await mutate(
       async () => {
-        const response = await fetcher(`${process.env.REACT_APP_BACKEND_URL}/api/todos/${id}`, {
+        const response = await fetcher(import.meta.env.VITE_BACKEND_URL + "/api/todos/${id}", {
           method: 'DELETE',
         });
         if (response.error) {
@@ -133,7 +131,7 @@ const Todos = () => {
   async function handleCompleteTodo(id, isCompleted) {
     await mutate(
       async () => {
-        const response = await fetcher(`${process.env.REACT_APP_BACKEND_URL}/api/todos/${id}`, {
+        const response = await fetcher(import.meta.env.VITE_BACKEND_URL+ "/api/todos/${id}", {
           method: 'PUT',
           body: { isCompleted: !isCompleted },
         });
