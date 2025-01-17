@@ -32,13 +32,14 @@
   
       console.log('Sending request with:', { email, password }); // Add this line
       const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/register`, {
+        
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
       });
-      
+      console.log(process.env.REACT_APP_BACKEND_URL)
   
       const data = await res.json();
       if (data?.error) {
