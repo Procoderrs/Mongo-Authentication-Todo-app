@@ -5,6 +5,7 @@ import Todos from './components/Todos'
 import Register from './components/Register';
 import Login from './components/Login';
 import { Toaster } from 'react-hot-toast';
+import App from './App.jsx'
 
 const root = document.getElementById("root");
 createRoot(root).render(
