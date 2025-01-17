@@ -29,10 +29,8 @@ export async function register(formData) {
 		console.log(email, password); // Debug the email and password
 
 		console.log("Sending request with:", { email, password }); // Add this line
-    console.log("Backend URL:", import.meta.env.VITE_BACKEND_URL);
-
-		const res = await fetch(
-			import.meta.env.VITE_BACKEND_URL + "/api/user/register",
+    const res = await fetch(
+      import.meta.env.VITE_BACKEND_URL + "/api/user/register",
 			{
 				method: "POST",
 				headers: {
@@ -56,10 +54,9 @@ export async function register(formData) {
 export async function login(previousState, formData) {
 	try {
 		const { email, password } = formData; // Use destructuring to directly get the email and password
-		console.log("Login attempt with:", { email, password });
-
-		const res = await fetch(
-			import.meta.env.VITE_BACKEND_URL + "/api/user/login",
+		console.log("Sending request with:", { email, password }); // Add this line
+    const res = await fetch(
+      import.meta.env.VITE_BACKEND_URL + "/api/user/login",
 			{
 				method: "POST",
 				headers: {
