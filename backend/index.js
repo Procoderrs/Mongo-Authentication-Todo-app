@@ -15,8 +15,8 @@ dotenv.config();
 
 const corsOptions = {
   origin: [
-    "http://localhost:5173", // Local development URL
-    "https://todo-authentication.netlify.app" // Netlify site URL
+   // "http://localhost:5173", // Local development URL
+    "https://mongo-authentication-todo-app-tjaq.vercel.app" // Netlify site URL
   ],
   credentials: true, // Allow credentials (cookies, etc.)
 };
