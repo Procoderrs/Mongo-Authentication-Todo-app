@@ -31,7 +31,7 @@
       console.log(email, password); // Debug the email and password
   
       console.log('Sending request with:', { email, password }); // Add this line
-      const res = await fetch('http://localhost:5000/api/user/register', {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +63,7 @@
       const { email, password } = formData;  // Use destructuring to directly get the email and password
       console.log('Login attempt with:', { email, password });
   
-      const res = await fetch('http://localhost:5000/api/user/login', {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

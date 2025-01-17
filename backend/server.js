@@ -13,10 +13,14 @@ const PORT=5000;
 
 dotenv.config();
 
-const corsOptions={
-  origin:"http://localhost:5173",
-  credentials:true,
+const corsOptions = {
+  origin: [
+    "http://localhost:5173", // Local development URL
+    "http://todo-authentication.netlify.app" // Netlify site URL
+  ],
+  credentials: true, // Allow credentials (cookies, etc.)
 };
+
 
 app.use(cors(corsOptions))
 app.use(bodyParser.json())

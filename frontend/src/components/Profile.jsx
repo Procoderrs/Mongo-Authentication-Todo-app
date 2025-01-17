@@ -10,7 +10,7 @@ const Profile = () => {
   async function handleLogout() {
     
     try{
-      const respones=await fetch('http://localhost:5000/api/user/logout',{
+      const respones=await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/logout`,{
         method:'POST',
         credentials:'include'
       })
