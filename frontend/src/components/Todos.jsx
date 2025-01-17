@@ -8,7 +8,7 @@ import { Button } from './ui/button';
 import Profile from './Profile';
 
 const fetcher = async (url, options = {}) => {
-  const response = await fetch(url, {
+  const response = await fetch (url, {
     method: options.method || 'GET',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
