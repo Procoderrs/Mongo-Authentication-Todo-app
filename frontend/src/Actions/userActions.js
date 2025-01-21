@@ -55,8 +55,8 @@
 				const { email, password } = formData;
 				console.log('Payload:', { email, password });
 		
-				const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/register`, {
-					//const res = await fetch('http://localhost:5000/api/user/register', {
+				//const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/register`, {
+					const res = await fetch('http://localhost:5000/api/user/register', {
 
 					method: 'POST',
 					headers: {
@@ -85,8 +85,8 @@ export async function login(previousState, formData) {
 	try {
 		const { email, password } = formData; // Use destructuring to directly get the email and password
 		console.log("Sending request with:", { email, password }); // Add this line
-    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
-			   // const res = await fetch("http://localhost:5000/api/user/login",
+    //const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
+			   const res = await fetch("http://localhost:5000/api/user/login",
 
 			{
 				method: "POST",

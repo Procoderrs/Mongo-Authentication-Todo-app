@@ -18,8 +18,8 @@ const corsOptions = {
 		//"https://todo-authentication.netlify.app" // Netlify site URL
 		// "https://mongo-authentication-todo-app-tjaq.vercel.app"
 		//"https://todo-authentication.netlify.app",
-		//"https://mongo-todo-authentication.netlify.app"
-		"https://mongo-authentication-todo-app-o9wo.vercel.app"
+		"https://mongo-todo-authentication.netlify.app"
+		//"https://mongo-authentication-todo-app-o9wo.vercel.app"
 	],
 	credentials: true, // Allow credentials (cookies, etc.)
 };
