@@ -106,7 +106,7 @@ res.cookie('access_token',token,{
   httpOnly:true,
   secure:process.env.NODE_ENV=== 'production',
 }).status(200).json('user logged in')
-console.log(req.cookies); // Log the cookies to see if the token is there
+console.log('line 109',req.cookies); // Log the cookies to see if the token is there
 
   //res.send('Register route');
 };

@@ -3,6 +3,7 @@ const createError = require('./error');
 
 const verifyToken=(req,res,next)=>{
   try{
+    console.log('cookies received',req.cookies)
     const token=req.cookies?.access_token;
     console.log(token);
     console.log("Token received:", token); // Add logging here
