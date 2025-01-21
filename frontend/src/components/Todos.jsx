@@ -6,10 +6,11 @@ import useSWR from 'swr';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import Profile from './Profile';
+
 // Define the local and production URLs
 const LOCAL_URL = "http://localhost:5000";
 const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://mongo-todo-authentication.netlify.app";
-const BACKEND_URL = process.env.NODE_ENV === "production" ? LOCAL_URL:VITE_BACKEND_URL ;
+const BACKEND_URL = process.env.NODE_ENV === "production" ? VITE_BACKEND_URL:LOCAL_URL ;
 
 // Fetcher function
 const fetcher = async (url, options = {}) => {
@@ -174,7 +175,7 @@ const Todos = () => {
 
   return (
     <>
-      <div className="bg-blue-600 h-screen flex items-center justify-center">
+      <div className="bg-blue-600  flex items-center justify-center">
         <div>
           <div className="mx-auto w-[800px] px-24 py-12 max-w-[820px] flex flex-col gap-6 bg-white rounded-lg">
             <div className="flex justify-end">

@@ -115,6 +115,8 @@ const logout = async function (req, res, next) {
 
   res.clearCookie('access_token',{
     httpOnly:true,
+    secure: true, // Ensures cookies are only sent over HTTPS
+  sameSite: 'None',
     secure:process.env.NODE_ENV==='production',
   }).status(200).json({message:'logged out successsfully'})
   //res.send('Logout route');
