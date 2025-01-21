@@ -13,8 +13,9 @@ const Register = () => {
 
   useEffect(() => {
     if (state.success) {
+      console.log(state.success)
       setTimeout(() => {
-        navigate('/login');
+        navigate('/');
         console.log(state.success);
       }, 2000);
     }
@@ -30,7 +31,6 @@ const Register = () => {
       setState({ error: 'Please provide both email and password.' });
       return;
     }
-    
     setIsPending(true);
     const response = await register(formData); 
     setState(response);
@@ -66,9 +66,13 @@ const Register = () => {
               {state.success.message} {'Redirecting...'}
             </span>
           )}
-          {state.error?.message && (
+          {/* {state.error?.message && (
             <span className="message">{state.error.message}</span>
-          )}
+          )} */}
+          {state.error && (
+  <span className="message errorMsg">{state.error}</span>
+)}
+
           <Button disabled={isPending}>
             {isPending ? 'Registering' : 'Register '}
           </Button>

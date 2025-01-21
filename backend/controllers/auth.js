@@ -6,11 +6,14 @@ const jwt=require('jsonwebtoken')
 
 
 
-const register = async function (req, res, next) {
- // res.send('Login route');
- const data=req.body;
+/* const register = async function (req, res, next) {
+ // res.send('Login route');}
+
+try {
+  const data=req.body;
  console.log(req.body)
  console.log(data)
+ 
 
 
   if(!data?.email || !data?.password) {
@@ -38,7 +41,50 @@ const register = async function (req, res, next) {
 res.status(201).json({ message: 'user created successfully', user: newUser });
  
 
+
+} catch (error) {
+  
 }
+
+} */
+ 
+
+const register = async function (req, res, next) {
+  try {
+    const { email, password } = req.body;
+
+    // Check for missing fields
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Missing fields' });
+    }
+
+    await connectToDB();
+
+    // Check if user already exists
+    const alreadyRegistered = await User.exists({ email });
+    if (alreadyRegistered) {
+      return res.status(400).json({ error: 'User already exists' });
+    }
+
+    // Hash password
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
+
+    // Create and save the new user
+    const newUser = new User({ email, password: hash });
+    await newUser.save();
+
+    return res.status(201).json({ message: 'User created successfully', user: newUser });
+  } catch (err) {
+    console.error('Error during registration:', err);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
+
+
+
 const login = async function (req, res, next) {
   const data=req.body;
   console.log(req.body)

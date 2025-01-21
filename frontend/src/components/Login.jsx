@@ -15,6 +15,7 @@ const Login = () => {
     if (state.success) {
       console.log('Login successful, redirecting...');
       console.log('User logged in:', state.success);
+      console.log('formdata',formData)
       setTimeout(() => {
         navigate('/todos');
         console.log(state.success);

@@ -23,8 +23,7 @@ const fetcher = async (url, options = {}) => {
 };
 
 const Todos = () => {
-  const { data = [], error, mutate, isLoading } = useSWR(
-    import.meta.env.VITE_BACKEND_URL + "/api/todos",
+  const { data = [], error, mutate, isLoading } = useSWR( `${import.meta.env.VITE_BACKEND_URL}/api/todos`,
     fetcher
   );
 
@@ -53,7 +52,7 @@ const Todos = () => {
       // Update existing todo
       await mutate(
         async () => {
-          const response = await fetcher(import.meta.env.VITE_BACKEND_URL+ "/api/todos/${editingId}", {
+          const response = await fetcher(`${import.meta.env.VITE_BACKEND_URL}/api/todos/${editingId}`, {
             method: 'PUT',
             body: { title: currentTodo },
           });
@@ -86,7 +85,7 @@ const Todos = () => {
       };
 
       async function addTodo() {
-        const response = await fetcher(import.meta.env.VITE_BACKEND_URL+ "/api/todos", {
+        const response = await fetcher( "http://localhost:5000/api/todos", {
           method: 'POST',
           body: { title: currentTodo },
         });
@@ -112,7 +111,7 @@ const Todos = () => {
     toast.success('Todo deleted');
     await mutate(
       async () => {
-        const response = await fetcher(import.meta.env.VITE_BACKEND_URL + "/api/todos/${id}", {
+        const response = await fetcher(`${import.meta.env.VITE_BACKEND_URL}/api/todos/${id}`, {
           method: 'DELETE',
         });
         if (response.error) {
@@ -131,7 +130,7 @@ const Todos = () => {
   async function handleCompleteTodo(id, isCompleted) {
     await mutate(
       async () => {
-        const response = await fetcher(import.meta.env.VITE_BACKEND_URL+ "/api/todos/${id}", {
+        const response = await fetcher( `${import.meta.env.VITE_BACKEND_URL}/api/todos/${id}`, {
           method: 'PUT',
           body: { isCompleted: !isCompleted },
         });
@@ -198,7 +197,7 @@ const Todos = () => {
           <Button className="h-9 rounded-md border border-input px-4  py-7  text-base shadow-md flex items-center hover:bg-primary transition ease-linear group">
             <FontAwesomeIcon
               icon={faAdd}
-              size={20}
+              
               className="transition ease-linear group-hover:stroke-white"
             />
             <span className="ml-2">

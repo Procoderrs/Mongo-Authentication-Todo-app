@@ -16,17 +16,28 @@ const corsOptions = {
 	origin: [
 		"http://localhost:5173", // Local development URL
 		//"https://todo-authentication.netlify.app" // Netlify site URL
-		// "https://mongo-authentication-todo-app-tjaq.vercel.app"
-		"https://todo-authentication.netlify.app",
+		 "https://mongo-authentication-todo-app-tjaq.vercel.app"
+		//"https://todo-authentication.netlify.app",
 	],
 	credentials: true, // Allow credentials (cookies, etc.)
 };
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
+app.use(express.json())
 app.use(cookieParser());
 app.use("/api/user", UserRoute);
 app.use("/api/todos", TodoRoute);
+
+
+// index.js
+app.use((req, res, next) => {
+  console.log(`Incoming request: ${req.method} ${req.url}`);
+  next();
+});
+
+// verifyToken
+
 
 connectToDB();
 
