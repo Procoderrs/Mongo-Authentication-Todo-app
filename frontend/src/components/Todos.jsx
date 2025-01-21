@@ -10,7 +10,7 @@ import Profile from './Profile';
 // Define the local and production URLs
 const LOCAL_URL = "http://localhost:5000";
 const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://mongo-todo-authentication.netlify.app";
-const BACKEND_URL = process.env.NODE_ENV === "production" ? LOCAL_URL : VITE_BACKEND_URL;
+const BACKEND_URL = process.env.NODE_ENV === "production" ? VITE_BACKEND_URL:LOCAL_URL ;
 
 // Fetcher function
 const fetcher = async (url, options = {}) => {
