@@ -17,7 +17,7 @@ const corsOptions = {
 		"http://localhost:5173", // Local development URL
 		
 		//"https://mongo-todo-authentication.netlify.app",
-		"https://mongo-authentication-todo-app-o9wo.vercel.app/"
+		"https://mongo-authentication-todo-app-o9wo.vercel.app"
 	],
 	credentials: true, // Allow credentials (cookies, etc.)
 };
