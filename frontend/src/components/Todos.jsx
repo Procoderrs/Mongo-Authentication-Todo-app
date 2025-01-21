@@ -8,14 +8,14 @@ import { Button } from './ui/button';
 import Profile from './Profile';
 
 const fetcher = async (url, options = {}) => {
-  const token = localStorage.getItem('token');
-  console.log('Fetched Token:', token); // Debugging token
+  const token = localStorage.getItem('token');  // Ensure that the token is being retrieved correctly
+  console.log("Fetched Token:", token);  // Add logging here to see if token is correctly retrieved
 
   const response = await fetch(url, {
     method: options.method || 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: token ? `Bearer ${token}` : undefined, // Set only if token exists
+      'Authorization': token ? `Bearer ${token}` : '',  // Only set the header if token exists
     },
     credentials: 'include',
     mode: 'cors',
@@ -26,9 +26,9 @@ const fetcher = async (url, options = {}) => {
     const error = await response.json();
     throw new Error(error.message || 'Something went wrong');
   }
-
   return response.json();
 };
+
 
 
 const Todos = () => {
