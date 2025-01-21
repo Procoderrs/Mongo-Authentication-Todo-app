@@ -8,19 +8,26 @@ import { Button } from './ui/button';
 import Profile from './Profile';
 
 const fetcher = async (url, options = {}) => {
-  const response = await fetch (url, {
+  const token = localStorage.getItem('token');
+  const response = await fetch(url, {
     method: options.method || 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
     credentials: 'include',
     mode: 'cors',
     body: options.body ? JSON.stringify(options.body) : undefined,
   });
+
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.message || 'Something went wrong');
   }
+
   return response.json();
 };
+
 
 const Todos = () => {
   const { data = [], error, mutate, isLoading } = useSWR( `${import.meta.env.VITE_BACKEND_URL}/api/todos`,

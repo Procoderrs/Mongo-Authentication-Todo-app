@@ -10,6 +10,8 @@ const verifyToken = require('../utils/verify')
 const getAllTodos = async function (req, res, next) {
 await connectToDB();
 const todos=await Todo.find({userID:req.user.id})
+console.log('Request User ID:', req.user.id); // Check if this matches the database records
+
 res.status(200).send(todos)
   // res.send('Login route');
  };
