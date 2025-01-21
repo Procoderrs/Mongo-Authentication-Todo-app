@@ -8,15 +8,11 @@ import { Button } from './ui/button';
 import Profile from './Profile';
 
 const fetcher = async (url, options = {}) => {
-  const token = localStorage.getItem('token');  // Ensure that the token is being retrieved correctly
-  console.log("Fetched Token:", token);  // Add logging here to see if token is correctly retrieved
 
   const response = await fetch(url, {
     method: options.method || 'GET',
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': token ? `Bearer ${token}` : '',  // Only set the header if token exists
-    },
+      'Content-Type': 'application/json' },
     credentials: 'include',
     mode: 'cors',
     body: options.body ? JSON.stringify(options.body) : undefined,
