@@ -23,8 +23,8 @@ const fetcher = async (url, options = {}) => {
 };
 
 const Todos = () => {
- // const { data = [], error, mutate, isLoading } = useSWR( `${import.meta.env.VITE_BACKEND_URL}/api/todos`,
-   const { data = [], error, mutate, isLoading } = useSWR( 'http://localhost:5000/api/todos',
+  const { data = [], error, mutate, isLoading } = useSWR( `${import.meta.env.VITE_BACKEND_URL}/api/todos`,
+   //const { data = [], error, mutate, isLoading } = useSWR( 'http://localhost:5000/api/todos',
 
     fetcher
   );
@@ -54,8 +54,8 @@ const Todos = () => {
       // Update existing todo
       await mutate(
         async () => {
-          //const response = await fetcher(`${import.meta.env.VITE_BACKEND_URL}/api/todos/${editingId}`, {
-          const response = await fetcher(`http://localhost:5000/api/todos/${editingId}`, {
+          const response = await fetcher(`${import.meta.env.VITE_BACKEND_URL}/api/todos/${editingId}`, {
+          //const response = await fetcher(`http://localhost:5000/api/todos/${editingId}`, {
 
             method: 'PUT',
             body: { title: currentTodo },
@@ -89,7 +89,9 @@ const Todos = () => {
       };
 
       async function addTodo() {
-        const response = await fetcher( "http://localhost:5000/api/todos", {
+        //const response = await fetcher( "http://localhost:5000/api/todos", {
+          const response = await fetcher( ` ${import.meta.env.VITE_BACKEND_URL}/api/todos`, {
+
           method: 'POST',
           body: { title: currentTodo },
         });
@@ -116,7 +118,7 @@ const Todos = () => {
     await mutate(
       async () => {
        // const response = await fetcher(`${import.meta.env.VITE_BACKEND_URL}/api/todos/${id}`, {
-        const response = await fetcher(`http://localhost:5000/api/todos/${id}`, {
+        const response = await fetcher(`${import.meta.env.VITE_BACKEND_URL}/api/todos/${id}`, {
 
           method: 'DELETE',
         });
@@ -138,7 +140,7 @@ const Todos = () => {
       async () => {
         // const response = await fetcher(`${import.meta.env.VITE_BACKEND_URL}/api/todos/${id}`, {
 
-        const response = await fetcher( `http://localhost:5000/api/todos/${id}`, {
+        const response = await fetcher( `${import.meta.env.VITE_BACKEND_URL}/todos/${id}`, {
           method: 'PUT',
           body: { isCompleted: !isCompleted },
         });
