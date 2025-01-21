@@ -101,7 +101,7 @@ const login = async function (req, res, next) {
   if(!isPasswordCorrect) return next(createError(400,'invalid credentials'));
 
   const token=jwt.sign({id:user._id},process.env.JWT);
-  console.log(token);
+  console.log(token,'token');
 res.cookie('access_token',token,{
   httpOnly:true,
   secure:process.env.NODE_ENV=== 'production',
