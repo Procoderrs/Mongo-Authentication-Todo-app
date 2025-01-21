@@ -6,7 +6,6 @@ import useSWR from 'swr';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import Profile from './Profile';
-import axios from 'axios';
 // Define the local and production URLs
 const LOCAL_URL = "http://localhost:5000";
 const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://mongo-todo-authentication.netlify.app";
@@ -14,7 +13,7 @@ const BACKEND_URL = process.env.NODE_ENV === "production" ? LOCAL_URL:VITE_BACKE
 
 // Fetcher function
 const fetcher = async (url, options = {}) => {
-  const response = await axios(url, {
+  const response = await fetch(url, {
     method: options.method || 'GET',
     headers: {
       'Content-Type': 'application/json',
