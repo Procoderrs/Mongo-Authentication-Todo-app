@@ -105,7 +105,8 @@ const login = async function (req, res, next) {
 res.cookie('access_token',token,{
   httpOnly:true,
   secure:process.env.NODE_ENV=== 'production',
-  sameSite:'None'
+  sameSite:'None',
+  maxAge: 24 * 60 * 60 * 1000,
 }).status(200).json('user logged in')
 console.log('line 109',req.cookies); // Log the cookies to see if the token is there
 
@@ -118,6 +119,7 @@ const logout = async function (req, res, next) {
     httpOnly:true,
     secure: true, // Ensures cookies are only sent over HTTPS
   sameSite: 'None',
+  
     secure:process.env.NODE_ENV==='production',
   }).status(200).json({message:'logged out successsfully'})
   //res.send('Logout route');
