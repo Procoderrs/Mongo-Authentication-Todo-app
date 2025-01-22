@@ -14,23 +14,28 @@ const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://mongo-todo
 const BACKEND_URL = process.env.NODE_ENV === "production" ? VITE_BACKEND_URL : LOCAL_URL;
 
 // Create an Axios instance with default configuration
-const axiosInstance = axios.create({
-  baseURL: BACKEND_URL,
-  withCredentials: true, // Ensures cookies are sent with requests
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+
 
 // Fetcher function for useSWR (based on Axios)
-const fetcher = (url) =>
-  axiosInstance
-    .get(url)
-    .then((response) => response.data)
-    .catch((error) => {
-      const errorMessage = error.response?.data?.message || 'Something went wrong';
-      throw new Error(errorMessage);
-    });
+// Fetcher function
+const fetcher = async (url, options = {}) => {
+  const response = await fetch(url, {
+    method: options.method || 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    mode: 'cors',
+    body: options.body ? JSON.stringify(options.body) : undefined,
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Something went wrong');
+  }
+  return response.json();
+};
+
 
 const Todos = () => {
   const { data = [], error, mutate, isLoading } = useSWR(`/api/todos`, fetcher);
@@ -172,7 +177,7 @@ const Todos = () => {
 
   return (
     <>
-      <div className="bg-blue-600 flex items-center justify-center">
+      <div className="bg-blue-600  min-h-screen w-full flex items-center justify-center">
         <div>
           <div className="mx-auto w-[800px] px-24 py-12 max-w-[820px] flex flex-col gap-6 bg-white rounded-lg">
             <div className="flex justify-end">
