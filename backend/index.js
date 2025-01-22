@@ -13,15 +13,15 @@ const PORT = 5000;
 dotenv.config();
 
 const corsOptions = {
-	origin: [
-		"http://localhost:5173", // Local development URL
-		
-		//"https://mongo-todo-authentication.netlify.app",
-		"https://mongo-authentication-todo-app-o9wo.vercel.app",
-		"https://mongo-todo-authentication.netlify.app"
-	],
-	credentials:true, // Allow credentials (cookies, etc.)
+  origin: [
+    "http://localhost:5173", // Local development URL
+    "https://mongo-authentication-todo-app-o9wo.vercel.app",
+    "https://mongo-todo-authentication.netlify.app"
+  ],
+  credentials: true, // Allow credentials (cookies, etc.)
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], // Allowed HTTP methods
 };
+
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// verifyToken
+
 
 
 connectToDB();
