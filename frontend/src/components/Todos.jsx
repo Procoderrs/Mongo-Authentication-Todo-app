@@ -19,11 +19,11 @@ const fetcher = async (url, options = {}) => {
     method: options.method || 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      //'Authorization': `Bearer ${localStorage.getItem('token')}`,
 
     },
     credentials: 'include',
-    mode: 'cors',
+    //mode: 'cors',
     body: options.body ? JSON.stringify(options.body) : undefined,
   });
 
