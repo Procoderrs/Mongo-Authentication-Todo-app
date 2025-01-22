@@ -106,7 +106,7 @@ res.cookie('access_token',token,{
   httpOnly:true,
   secure:process.env.NODE_ENV=== 'production',
   sameSite:'None',
-  maxAge: 24 * 60 * 60 * 1000,
+  maxAge: 30 * 24 * 60 * 60 * 1000,
 }).status(200).json('user logged in')
 console.log('line 109',req.cookies); // Log the cookies to see if the token is there
 
