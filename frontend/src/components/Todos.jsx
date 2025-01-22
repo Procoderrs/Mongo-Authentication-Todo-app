@@ -26,6 +26,9 @@ const fetcher = async (url, options = {}) => {
     //mode: 'cors',
     body: options.body ? JSON.stringify(options.body) : undefined,
   });
+  console.log('Sending request to:', url);
+  console.log('Request options:', options);
+
 
   console.log('response status',response.status);
 
