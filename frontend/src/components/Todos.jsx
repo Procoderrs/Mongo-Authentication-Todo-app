@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdd, faCircleUser, faTrash, faEdit, faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -11,12 +10,8 @@ import Profile from './Profile';
 // Define the local and production URLs
 const LOCAL_URL = "http://localhost:5000";
 const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://mongo-todo-authentication.netlify.app";
-const BACKEND_URL = process.env.NODE_ENV === "production" ? VITE_BACKEND_URL : LOCAL_URL;
+const BACKEND_URL = import.meta.env.MODE === "production" ? VITE_BACKEND_URL : LOCAL_URL;
 
-// Create an Axios instance with default configuration
-
-
-// Fetcher function for useSWR (based on Axios)
 // Fetcher function
 const fetcher = async (url, options = {}) => {
   const response = await fetch(url, {
@@ -36,9 +31,8 @@ const fetcher = async (url, options = {}) => {
   return response.json();
 };
 
-
 const Todos = () => {
-  const { data = [], error, mutate, isLoading } = useSWR(`/api/todos`, fetcher);
+  const { data = [], error, mutate, isLoading } = useSWR(`${BACKEND_URL}/api/todos`, fetcher);
 
   const [currentTodo, setCurrentTodo] = useState('');
   const [editingId, setEditingId] = useState(null);
@@ -67,8 +61,9 @@ const Todos = () => {
       // Update existing todo
       await mutate(
         async () => {
-          const response = await axiosInstance.put(`/api/todos/${editingId}`, {
-            title: currentTodo,
+          const response = await fetcher(`${BACKEND_URL}/api/todos/${editingId}`, {
+            method: 'PUT',
+            body: { title: currentTodo },
           });
 
           if (response.error) {
@@ -99,14 +94,14 @@ const Todos = () => {
       };
 
       async function addTodo() {
-        const response = await axiosInstance.post(`/api/todos`, {
-          title: currentTodo,
+        const response = await fetcher(`${BACKEND_URL}/api/todos`, {
+          method: 'POST',
+          body: { title: currentTodo },
         });
-
         if (response.error) {
           handleError(response.error);
         }
-        return [...data, response.data];
+        return [...data, response];
       }
 
       await mutate(addTodo, {
@@ -125,7 +120,9 @@ const Todos = () => {
     toast.success('Todo deleted');
     await mutate(
       async () => {
-        const response = await axiosInstance.delete(`/api/todos/${id}`);
+        const response = await fetcher(`${BACKEND_URL}/api/todos/${id}`, {
+          method: 'DELETE',
+        });
         if (response.error) {
           handleError(response.error);
         }
@@ -142,8 +139,9 @@ const Todos = () => {
   async function handleCompleteTodo(id, isCompleted) {
     await mutate(
       async () => {
-        const response = await axiosInstance.put(`/api/todos/${id}`, {
-          isCompleted: !isCompleted,
+        const response = await fetcher(`${BACKEND_URL}/api/todos/${id}`, {
+          method: 'PUT',
+          body: { isCompleted: !isCompleted },
         });
 
         if (response.error) {
@@ -177,14 +175,16 @@ const Todos = () => {
 
   return (
     <>
-      <div className="bg-blue-600  min-h-screen w-full flex items-center justify-center">
+      <div className="bg-blue-600 flex items-center justify-center">
         <div>
           <div className="mx-auto w-[800px] px-24 py-12 max-w-[820px] flex flex-col gap-6 bg-white rounded-lg">
             <div className="flex justify-end">
               <Profile />
             </div>
 
-            <h1 className="text-blue-500 font-bold text-4xl text-center">Todo-App</h1>
+            <h1 className="text-blue-500 font-bold text-4xl text-center">
+              Todo-App
+            </h1>
 
             <form onSubmit={handleAddOrUpdateTodo} className="flex gap-10 justify-center items-center">
               <Input
