@@ -8,12 +8,15 @@ const verifyToken=(req,res,next)=>{
     console.log(token);
     console.log("Token received:", token); // Add logging here
     if(!token){
+      console.log('token missing')
       return next(createError(401,'not authenticated'))
     }
     jsontoken.verify(token,process.env.JWT,(err,user)=>{
   if(err)return next(createError(403,'token is not valid'));
+  console.log('token verification failed',err)
   console.log('decoded user',user)
   req.user=user;
+  console.log('verified user',user)
   next();
     })
   }

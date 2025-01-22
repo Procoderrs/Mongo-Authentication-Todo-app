@@ -7,14 +7,31 @@ const verifyToken = require('../utils/verify')
 
 
 
-const getAllTodos = async function (req, res, next) {
+/* const getAllTodos = async function (req, res, next) {
 await connectToDB();
 const todos=await Todo.find({userID:req.user.id})
+console.log('req.user in get all todos:',req.user)
 console.log('Request User ID:', req.user.id); // Check if this matches the database records
 
 res.status(200).send(todos)
   // res.send('Login route');
- };
+ }; */
+ 
+ 
+ 
+ const getAllTodos = async function (req, res, next) {
+  try {
+    console.log("Req.user in getAllTodos:", req.user); // Should log user details
+    await connectToDB();
+    const todos = await Todo.find({ userID: req.user.id });
+    console.log("Fetched todos:", todos);
+    res.status(200).json(todos);
+  } catch (error) {
+    console.error("Error fetching todos:", error);
+    next(createError(500, "Internal server error"));
+  }
+};
+ 
  
  const getTodos = async function (req, res, next) {
   try{

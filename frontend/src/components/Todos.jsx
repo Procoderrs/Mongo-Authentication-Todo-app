@@ -14,6 +14,7 @@ const BACKEND_URL = import.meta.env.MODE === "production" ? VITE_BACKEND_URL : L
 
 // Fetcher function
 const fetcher = async (url, options = {}) => {
+ try {
   const response = await fetch(url, {
     method: options.method || 'GET',
     headers: {
@@ -24,11 +25,16 @@ const fetcher = async (url, options = {}) => {
     body: options.body ? JSON.stringify(options.body) : undefined,
   });
 
+  console.log('response status',response.status);
+
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.message || 'Something went wrong');
   }
   return response.json();
+ } catch (error) {
+  console.log('fetcher error',error)
+ }
 };
 
 const Todos = () => {
