@@ -65,9 +65,7 @@ export async function login(previousState, formData) {
     const data = await res.json();
     console.log("Login response:", data,'token',data.token);
 
-    if (data.token) {
-      console.log("Received Token:", data.token);
-    }
+    
 
     // If there's an error in the response, handle it
     if (data?.error) {

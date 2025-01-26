@@ -35,6 +35,8 @@ const Login = () => {
     const response = await login(state, formData);  // Pass formData directly
     setState(response); // Update the state based on the response
     setIsPending(false); // Reset loading state
+      window.localStorage.setItem('token',data.token)
+  
   };
 
   return (
