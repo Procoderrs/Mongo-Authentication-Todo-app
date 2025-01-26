@@ -12,7 +12,7 @@ const verifyToken=(req,res,next)=>{
       return next(createError(401,'not authenticated'))
     }
     jsontoken.verify(token,process.env.JWT,(err,user)=>{
-      res.json({authenticated:true,user})
+      //res.json({authenticated:true,user})
   if(err)return next(createError(403,'token is not valid'));
   console.log('token verification failed',err)
   console.log('decoded user',user)

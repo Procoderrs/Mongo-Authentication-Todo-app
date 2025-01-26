@@ -11,10 +11,10 @@ router.post('/register', register)
 router.post('/logout',logout )
 
 
-router.get('/validate', verifyToken, (req, res) => {
+/* router.get('/validate', verifyToken, (req, res) => {
   // If the token is valid, send success response
   res.status(200).json({ authenticated: true, user: req.user });
-});
+}); */
 
 
 module.exports = router;
