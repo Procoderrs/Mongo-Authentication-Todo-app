@@ -282,7 +282,7 @@ const Todos = () => {
   useEffect(() => {
     async function fetchTodos() {
       try {
-        const response = await fetch(`${BACKEND_URL}/api/todos`, {
+        const response = await fetch(`${BACKEND_URL}api/todos`, {
           method: 'GET',
           credentials: 'include',
         });
