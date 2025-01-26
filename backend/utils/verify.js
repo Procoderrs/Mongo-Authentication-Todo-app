@@ -1,4 +1,4 @@
-const jsontoken=require('jsonwebtoken');
+ const jsontoken=require('jsonwebtoken');
 const createError = require('./error');
 
 const verifyToken=(req,res,next)=>{
@@ -12,6 +12,7 @@ const verifyToken=(req,res,next)=>{
       return next(createError(401,'not authenticated'))
     }
     jsontoken.verify(token,process.env.JWT,(err,user)=>{
+      res.json({authenticated:true,user})
   if(err)return next(createError(403,'token is not valid'));
   console.log('token verification failed',err)
   console.log('decoded user',user)
@@ -25,4 +26,43 @@ const verifyToken=(req,res,next)=>{
     res.status(403).json("Invalid or missing token");
   }
 }
-module.exports=verifyToken;
+module.exports=verifyToken; 
+
+
+
+/* const jsontoken = require('jsonwebtoken');
+const createError = require('./error');
+
+const verifyToken = (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
+    
+    if (!authHeader) {
+      return next(createError(401, 'No token provided'));
+    }
+
+    // Extract the token from the header (Bearer <token>)
+    const token = authHeader.split(' ')[1];
+    
+    // Verify the token
+    jsontoken.verify(token, process.env.JWT, (err, decoded) => {
+      if (err) {
+        console.log('Token verification failed:', err);
+        return next(createError(403, 'Token is not valid'));
+      }
+
+      // Attach the decoded user information to the request object
+      req.userId = decoded.id;
+      console.log('Verified user:', decoded);
+      
+      // Proceed to the next middleware
+      next();
+    });
+  } catch (error) {
+    console.log('Error during token verification:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+module.exports = verifyToken;
+ */
