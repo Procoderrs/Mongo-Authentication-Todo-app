@@ -286,6 +286,7 @@ const Todos = () => {
           method: 'GET',
           credentials: 'include',
         });
+        console.log("Fetching todos from:", `${hi}api/todos`);
         const data = await response.json();
         if (response.ok) {
           setTodos(data);
