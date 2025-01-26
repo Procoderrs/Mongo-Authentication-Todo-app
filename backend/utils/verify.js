@@ -1,7 +1,7 @@
  const jsontoken=require('jsonwebtoken');
 const createError = require('./error');
 
-const verifyToken=(req,res,next)=>{
+const verifyToken=async(req,res,next)=>{
   try{
     console.log('cookies received',req.cookies)
     const token=req.cookies?.access_token;
@@ -10,11 +10,11 @@ const verifyToken=(req,res,next)=>{
     console.log(token);
     console.log("Token received:", token); // Add logging here
     if(!token){
-      if (!token) return res.status(401).json({ authenticated: false });
+      //if (!token) return res.status(401).json({ authenticated: false });
       console.log('token missing')
       return next(createError(401,'not authenticated'))
     }
-    jsontoken.verify(token,process.env.JWT,async (err,user)=>{
+    jsontoken.verify(token,process.env.JWT,(err,user)=>{
       //res.json({authenticated:true,user})
   if(err)return next(createError(403,'token is not valid'));
 

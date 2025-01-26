@@ -102,11 +102,11 @@ const login = async function (req, res, next) {
 
   const token=jwt.sign({id:user._id},process.env.JWT,{expiresIn:'7d'});
   console.log(token,'token');
-res.cookie('access_token',token,{
-  httpOnly:true,
-  secure:process.env.NODE_ENV=== 'production',
-  sameSite:'None',
-  maxAge: 7 * 24 * 60 * 60 * 1000,
+  res.cookie('access_token', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // Only true in production
+    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // None for cross-site cookies
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
 }).status(200).json('user logged in')
 console.log('line 109',req.cookies); // Log the cookies to see if the token is there
 //res.send('logged in')
