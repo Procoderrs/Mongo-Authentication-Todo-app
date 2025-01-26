@@ -111,6 +111,10 @@ res.cookie('access_token',token,{
 console.log('line 109',req.cookies); // Log the cookies to see if the token is there
 //res.send('logged in')
   //res.send('Register route');
+
+res.status(200).json({success:true,token});
+console.log('token',token)
+
 };
 
 const logout = async function (req, res, next) {
