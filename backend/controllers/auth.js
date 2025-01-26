@@ -109,7 +109,7 @@ res.cookie('access_token',token,{
   maxAge: 7 * 24 * 60 * 60 * 1000,
 }).status(200).json('user logged in')
 console.log('line 109',req.cookies); // Log the cookies to see if the token is there
-
+res.send('logged in')
   //res.send('Register route');
 };
 
@@ -122,7 +122,7 @@ const logout = async function (req, res, next) {
   
     secure:process.env.NODE_ENV==='production',
   }).status(200).json({message:'logged out successsfully'})
-  //res.send('Logout route');
+  res.send('Logout route');
 };
 
 module.exports = { login, register, logout };
