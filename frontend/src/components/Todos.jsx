@@ -32,7 +32,7 @@ const fetcher = async (url, options = {}) => {
     const data = await response.json();
     console.log('Response data:', data); // Log the response data
 
-    return data;
+    return data.todo||[];
   } catch (error) {
     console.error('Fetcher error:', error.message);
     throw error; // Propagate the error to `mutate`
