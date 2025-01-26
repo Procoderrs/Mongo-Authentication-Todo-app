@@ -11,14 +11,25 @@ import { Toaster } from 'react-hot-toast';
 
 
 const root = document.getElementById("root");
-
 createRoot(root).render(
   <StrictMode>
-    <Toaster position="top-center" />
+    <Toaster position='top-center'/>  
     <BrowserRouter>
-      <App />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/todos" element={<Todos />} />
+        <Route path="/register" element={<Register />} />
+
+        {/* <Route
+          path="/todos"
+          element={
+            <ProtectedRoute>
+              <Todos />
+            </ProtectedRoute>
+          }
+        /> */}
+      </Routes>
     </BrowserRouter>
   </StrictMode>
-
-       
 );
