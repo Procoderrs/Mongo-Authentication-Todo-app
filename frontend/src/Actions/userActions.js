@@ -64,7 +64,7 @@ export async function login(previousState, formData) {
     }
 
     const data = await res.json();
-    console.log("Login response:", data,'token',data.token);
+    console.log("Login response:", data);
 
     
 
