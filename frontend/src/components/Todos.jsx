@@ -105,10 +105,13 @@ const Todos = () => {
       };
 
       async function addTodo() {
+        console.log('adding todo',currentTodo)
         const response = await fetcher(`${BACKEND_URL}/api/todos`, {
           method: 'POST',
           body: { title: currentTodo },
         });
+
+        console.log('respnse from backend',response)
         if (response.error) {
           handleError(response.error);
         }
