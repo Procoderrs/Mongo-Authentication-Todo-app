@@ -1,5 +1,7 @@
 const express = require('express');
 const { login, register, logout } = require('../controllers/auth'); // Import the controller functions
+const verifyToken = require('../utils/verify')
+
 const router = express.Router(); // Correct usage of express.Router()
 
 router.post('/login', login)
