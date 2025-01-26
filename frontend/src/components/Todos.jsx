@@ -14,32 +14,29 @@ const BACKEND_URL = import.meta.env.MODE === "production" ? VITE_BACKEND_URL : L
 
 // Fetcher function
 const fetcher = async (url, options = {}) => {
- try {
-  const response = await fetch(url, {
-    method: options.method || 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      //'Authorization': `Bearer ${localStorage.getItem('token')}`,
+  try {
+    const response = await fetch(url, {
+      method: options.method || 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: options.body ? JSON.stringify(options.body) : undefined,
+    });
 
-    },
-    credentials: 'include',
-    //mode: 'cors',
-    body: options.body ? JSON.stringify(options.body) : undefined,
-  });
-  console.log('Sending request to:', url);
-  console.log('Request options:', options);
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Something went wrong');
+    }
 
+    const data = await response.json();
+    console.log('Response data:', data); // Log the response data
 
-  console.log('response status',response.status);
-
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'Something went wrong');
+    return data;
+  } catch (error) {
+    console.error('Fetcher error:', error.message);
+    throw error; // Propagate the error to `mutate`
   }
-  return response.json();
- } catch (error) {
-  console.log('fetcher error',error)
- }
 };
 
 const Todos = () => {
