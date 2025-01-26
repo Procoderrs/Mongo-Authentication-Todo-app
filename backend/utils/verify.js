@@ -5,15 +5,26 @@ const verifyToken=(req,res,next)=>{
   try{
     console.log('cookies received',req.cookies)
     const token=req.cookies?.access_token;
+
+
     console.log(token);
     console.log("Token received:", token); // Add logging here
     if(!token){
+      if (!token) return res.status(401).json({ authenticated: false });
       console.log('token missing')
       return next(createError(401,'not authenticated'))
     }
-    jsontoken.verify(token,process.env.JWT,(err,user)=>{
+    jsontoken.verify(token,process.env.JWT,async (err,user)=>{
       //res.json({authenticated:true,user})
   if(err)return next(createError(403,'token is not valid'));
+
+  /* const currentUser = await User.findById(user.id).select('-password');
+  if (!currentUser) return res.status(404).json({ error: 'User not found' });
+
+  res.status(200).json({ authenticated: true, user: currentUser });
+ */
+
+
   console.log('token verification failed',err)
   console.log('decoded user',user)
   req.user=user;
