@@ -3,19 +3,21 @@ import { Label } from './ui/label';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Link, useNavigate } from 'react-router-dom';
-import { register } from '../Actions/userActions';
+import { login } from '../Actions/userActions';
 
-const Register = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: '', password: '' });
-  const [state, setState] = useState({ success: null, error: null });
   const [isPending, setIsPending] = useState(false);
+  const [state, setState] = useState({ success: null, error: null });
 
   useEffect(() => {
     if (state.success) {
-      console.log(state.success)
+      console.log('Login successful, redirecting...');
+      console.log('User logged in:', state.success);
+      console.log('formdata',formData)
       setTimeout(() => {
-        navigate('/');
+        navigate('/todos');
         console.log(state.success);
       }, 2000);
     }
@@ -27,16 +29,14 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.email || !formData.password) {
-      setState({ error: 'Please provide both email and password.' });
-      return;
-    }
-    setIsPending(true);
-    const response = await register(formData); 
-    setState(response);
-    setIsPending(false);
+   // window.localStorage.setItem('isloggedIn',true)
+    console.log("Form submitted with data:", formData);  // Log the data before sending to the backend
+    setIsPending(true); // Set loading state
+    const response = await login(state, formData);  // Pass formData directly
+    setState(response); // Update the state based on the response
+    setIsPending(false); // Reset loading state
   };
-  
+
   return (
     <>
       <div className='h-screen flex justify-center items-center transform -translate-y-16'>
@@ -61,25 +61,16 @@ const Register = () => {
               onChange={handleChange}
             />
           </div>
-          {state.success?.message && (
-            <span className="message successMsg">
-              {state.success.message} {'Redirecting...'}
-            </span>
-          )}
-          {/* {state.error?.message && (
+          {state.error?.message && (
             <span className="message">{state.error.message}</span>
-          )} */}
-          {state.error && (
-  <span className="message errorMsg">{state.error}</span>
-)}
-
+          )}
           <Button disabled={isPending}>
-            {isPending ? 'Registering' : 'Register '}
+            {isPending ? 'Logging in' : 'Login '}
           </Button>
           <span className='text-[#63657b] text-center'>
-            Already have an Account?{' '}
-            <Link to='/Login' className='transition ease-in-out hover:cursor-pointer hover:text-primary hover:underline'>
-              Login
+            Don't have an Account?{'  '}
+            <Link to='/Register' className='transition ease-in-out hover:cursor-pointer hover:text-primary hover:underline'>
+              Register
             </Link>
           </span>
         </form>
@@ -88,4 +79,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
