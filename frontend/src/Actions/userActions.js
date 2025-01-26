@@ -43,6 +43,7 @@ export async function login(previousState, formData) {
   try {
     const { email, password } = formData; // Destructure the form data
     console.log("Sending request with:", { email, password });
+    
 
     // Make the API call to the backend
     const res = await fetch(`${BACKEND_URL}/api/user/login`, {
@@ -62,9 +63,9 @@ export async function login(previousState, formData) {
     }
 
     const data = await res.json();
-    console.log("Login response:", data);
+    console.log("Login response:", data,'token',data.token);
 
-    if (data?.token) {
+    if (data.token) {
       console.log("Received Token:", data.token);
     }
 
