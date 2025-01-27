@@ -36,8 +36,8 @@ function App() {
         <Routes>
         <Route
         path="/"
-        element={isAuthenticated ? <TodosPage /> : <Navigate to="/login" />}/>
-      <Route path="/login" element={<LoginPage />} />
+        element={isAuthenticated ? <Todos/> : <Navigate to="/login" />}/>
+      <Route path="/login" element={<Login />} />
           <Route path="/register"  element= {<Register />}
           />
         </Routes>
