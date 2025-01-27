@@ -11,7 +11,7 @@ router.post('/register', register);
 router.post('/logout', logout);
 
 // Validation route
-router.get('/validate', verifyToken, (req, res) => {
+/* router.get('/validate', verifyToken, (req, res) => {
   try {
     // If the token is valid, return success response
     res.status(200).json({ authenticated: true, user: req.user });
@@ -19,6 +19,6 @@ router.get('/validate', verifyToken, (req, res) => {
     console.error("Validation error:", err);
     next(createError(500, "Server error"));
   }
-});
+}); */
 
 module.exports = router;
