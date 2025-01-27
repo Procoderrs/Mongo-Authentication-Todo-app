@@ -6,7 +6,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../Actions/userActions';
 
 const Login = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [isPending, setIsPending] = useState(false);
   const [state, setState] = useState({ success: null, error: null });

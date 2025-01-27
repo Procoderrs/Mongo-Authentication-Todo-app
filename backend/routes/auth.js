@@ -9,15 +9,18 @@ router.post('/login', login);
 router.post('/register', register);
 router.post('/logout', logout);
 
-// Validation route
-/* router.get('/validate', verifyToken, (req, res) => {
+// Add a route for /auth/verify
+router.get('/verify', verifyToken, (req, res) => {
   try {
-    // If the token is valid, return success response
-    res.status(200).json({ authenticated: true, user: req.user });
+    // If token is valid, respond with user info
+    res.status(200).json({
+      authenticated: true,
+      user: req.user, // verifyToken middleware mein `req.user` set hota hai
+    });
   } catch (err) {
-    console.error("Validation error:", err);
-    next(createError(500, "Server error"));
+    console.error('Verification error:', err);
+    res.status(500).json({ error: 'Internal server error' });
   }
-}); */
+});
 
 module.exports = router;
