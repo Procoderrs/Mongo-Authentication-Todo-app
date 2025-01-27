@@ -105,7 +105,7 @@ const login = async function (req, res, next) {
   res.cookie('access_token', token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production', // Only true in production
-    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // None for cross-site cookies
+    sameSite: 'None', // None for cross-site cookies
     maxAge: 7 * 24 * 60 * 60 * 1000, // 30 days
 }).status(200).json('user logged in')
 console.log('line 109',req.cookies); // Log the cookies to see if the token is there
