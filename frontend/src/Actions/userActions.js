@@ -10,7 +10,6 @@ const BACKEND_URL = process.env.NODE_ENV === "production" ?  VITE_BACKEND_URL: L
 
 console.log("Backend URL:", BACKEND_URL);
 
-const navigation=useNavigate()
 
 // Register function
 export async function register(formData) {
