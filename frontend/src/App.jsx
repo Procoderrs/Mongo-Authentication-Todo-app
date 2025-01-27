@@ -1,5 +1,5 @@
 import Profile from './components/Profile';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 function App() {
   const [user, setUser] = useState(null);
