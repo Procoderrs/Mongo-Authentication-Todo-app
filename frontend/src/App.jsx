@@ -14,7 +14,7 @@ function App() {
     const authCheck = async () => {
       try {
         const response = await axios.get('/api/auth/verify', { withCredentials: true });
-        setIsAuthenticated(response.data.authenticated); // Update authentication state
+        setIsAuthenticated(response.data.authenticated);
       } catch (error) {
         console.log('Auth check failed:', error);
         setIsAuthenticated(false);
@@ -26,30 +26,21 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Show loading state while checking authentication
+    return <div>Loading...</div>;
   }
 
   return (
     <div>
       <Toaster position="top-center" />
       <BrowserRouter>
-        <Routes>
-          {/* Public routes */}
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/todos" />} />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/todos" element={<Todos />} />
+        <Route path="/register" element={<Register />} />
 
-          {/* Protected route for Todos */}
-          <Route
-            path="/todos"
-            element={isAuthenticated ? <Todos /> : <Navigate to="/login" />}
-          />
-
-          {/* Redirect root path based on authentication */}
-          <Route path="/" element={<Navigate to={isAuthenticated ? "/todos" : "/login"} />} />
-
-          {/* Catch-all route for undefined paths */}
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+        
+      </Routes>
       </BrowserRouter>
     </div>
   );
