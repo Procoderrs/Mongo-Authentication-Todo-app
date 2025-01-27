@@ -26,7 +26,7 @@ const Profile = () => {
       if(!respones.ok){
         throw new Error ('logout  failed. please try again.')
       }
-      navigate('/')
+      navigate('/login')
       
     }
     catch(error){
