@@ -1,5 +1,6 @@
 
 import axios from "axios";
+
 // Define the local and production URLs
 const LOCAL_URL = "http://localhost:5000"; // Local backend URL
 const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://mongo-todo-authentication.netlify.app"; // Production backend URL
@@ -8,7 +9,6 @@ const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://mongo-todo
 const BACKEND_URL = process.env.NODE_ENV === "production" ?  VITE_BACKEND_URL: LOCAL_URL;
 
 console.log("Backend URL:", BACKEND_URL);
-
 
 // Register function
 export async function register(formData) {
@@ -35,6 +35,7 @@ export async function register(formData) {
     return {
       success: null,
       error: error.response?.data?.error || "Something went wrong. Please try again.",
+      
     };
   }
 }

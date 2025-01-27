@@ -6,48 +6,6 @@ const jwt=require('jsonwebtoken')
 
 
 
-/* const register = async function (req, res, next) {
- // res.send('Login route');}
-
-try {
-  const data=req.body;
- console.log(req.body)
- console.log(data)
- 
-
-
-  if(!data?.email || !data?.password) {
-  return next(createError(400,'missing fields'))
-  
-  }
-
-
-  //res.send('register route')
-  await connectToDB() ;
-
-
-
-  const alreadyRegisterd=await User.exists({
-    email:data.email});
-    if(alreadyRegisterd)
-      return next(createError(400,'user already exists.'))
-      //res.send('register')
-      const salt=bcrypt.genSaltSync(10)
-      const hash=bcrypt.hashSync(req.body.password,salt)
-
-
-      const newUser=new User ({...req.body,password:hash });
-       await newUser.save()
-res.status(201).json({ message: 'user created successfully', user: newUser });
- 
-
-
-} catch (error) {
-  
-}
-
-} */
- 
 
 const register = async function (req, res, next) {
   try {
@@ -112,10 +70,17 @@ console.log('line 109',req.cookies); // Log the cookies to see if the token is t
 //res.send('logged in')
   //res.send('Register route');
 
+
+
+  
+
 res.status(200).json({success:true,token});
 console.log('token',token)
 
 };
+
+
+
 
 const logout = async function (req, res, next) {
 

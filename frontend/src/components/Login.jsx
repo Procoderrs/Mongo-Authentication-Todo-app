@@ -20,7 +20,7 @@ const Login = () => {
       setTimeout(() => {
         navigate('/todos');
         console.log(state.success);
-      }, 2000);
+      }, 1000);
     }
   }, [state.success, navigate]);
 
@@ -30,7 +30,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   // window.localStorage.setItem('isloggedIn',true)
     console.log("Form submitted with data:", formData);  // Log the data before sending to the backend
     setIsPending(true); // Set loading state
     const response = await login(state, formData);  // Pass formData directly
