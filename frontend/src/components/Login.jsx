@@ -22,6 +22,9 @@ const Login = () => {
         console.log(state.success);
       }, 2000);
     }
+    else {
+      navigate('/login')
+    }
   }, [state.success, navigate]);
 
   const handleChange = (event) => {
