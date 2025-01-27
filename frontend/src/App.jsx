@@ -33,14 +33,14 @@ function App() {
     <div>
       <Toaster position="top-center" />
       <BrowserRouter>
-        <Routes>
-        <Route
-        path="/"
-        element={isAuthenticated ? <Todos/> : <Navigate to="/login" />}/>
-      <Route path="/login" element={<Login />} />
-          <Route path="/register"  element= {<Register />}
-          />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/todos" element={<Todos />} />
+        <Route path="/register" element={<Register />} />
+
+        
+      </Routes>
       </BrowserRouter>
     </div>
   );
