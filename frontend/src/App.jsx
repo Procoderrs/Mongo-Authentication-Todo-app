@@ -34,17 +34,11 @@ function App() {
       <Toaster position="top-center" />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/login" element={isAuthenticated ? <Navigate to="/todos" /> : <Login />} />
-          <Route
-            path="/todos"
-            element={
-              isAuthenticated ? <Todos /> : <Navigate to="/login" />
-            }
-          />
-          <Route
-            path="/register"
-            element={isAuthenticated ? <Navigate to="/todos" /> : <Register />}
+        <Route
+        path="/"
+        element={isAuthenticated ? <TodosPage /> : <Navigate to="/login" />}/>
+      <Route path="/login" element={<LoginPage />} />
+          <Route path="/register"  element= {<Register />}
           />
         </Routes>
       </BrowserRouter>
