@@ -1,48 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import axios from 'axios';
-import { Toaster } from 'react-hot-toast';
-import Todos from './components/Todos';
-import Register from './components/Register';
-import Login from './components/Login';
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import axios from "axios";
+import { Toaster } from "react-hot-toast";
+import Todos from "./components/Todos";
+import Register from "./components/Register";
+import Login from "./components/Login";
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function App() {
- /*  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const authCheck = async () => {
+    const checkPersistedLogin = async () => {
       try {
-        const response = await axios.get('/api/auth/verify', { withCredentials: true });
-        setIsAuthenticated(response.data.authenticated);
-      } catch (error) {
-        console.log('Auth check failed:', error);
-        setIsAuthenticated(false);
-      } finally {
-        setLoading(false);
+        const response = await axios.get(`${BACKEND_URL}/api/user/verify`, { withCredentials: true });
+        setUser(response.data);
+      } catch {
+        console.log("Not logged in");
+        setUser(null);
       }
     };
-    authCheck();
+    checkPersistedLogin();
   }, []);
-
-  if (loading) {
-    return <div>Loading...</div>; */
-  
 
   return (
     <div>
       <Toaster position="top-center" />
-      <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/todos" element={<Todos />} />
-
-        <Route path="/register" element={<Register />} />
-
-        
-      </Routes>
-      </BrowserRouter>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to={user ? "/todos" : "/login"} />} />
+          <Route path="/login" element={!user ? <Login /> : <Navigate to="/todos" />} />
+          <Route path="/todos" element={user ? <Todos user={user} /> : <Navigate to="/login" />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
