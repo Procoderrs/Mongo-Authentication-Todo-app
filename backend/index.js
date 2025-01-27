@@ -21,6 +21,7 @@ const corsOptions = {
   ],
   credentials: true, // Allow credentials (cookies, etc.)
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], // Allowed HTTP methods
+
 };
 
 
@@ -30,6 +31,8 @@ app.use(express.json())
 app.use(cookieParser());
 app.use("/api/user", UserRoute);
 app.use("/api/todos", TodoRoute);
+
+
 
 
 // index.js

@@ -1,7 +1,6 @@
 const express = require('express');
 const { login, register, logout } = require('../controllers/auth'); // Import controller functions
-const verifyToken = require('../utils/verifyToken');
-const createError = require('../utils/error');
+
 
 const router = express.Router();
 
