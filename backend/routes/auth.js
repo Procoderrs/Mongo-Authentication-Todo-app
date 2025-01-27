@@ -25,7 +25,7 @@ router.post('/logout',logout )
 
 
 
-router.get('/api/auth/validate', (req, res, next) => {
+router.get('/api/auth/verify', (req, res, next) => {
   try {
     const token = req.cookies?.access_token; // Token from cookies
     if (!token) {

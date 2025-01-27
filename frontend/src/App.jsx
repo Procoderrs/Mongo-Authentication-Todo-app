@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const authCheck = async () => {
       try {
-        const response = await axios.get('/api/auth/validate', { withCredentials: true });
+        const response = await axios.get('/api/auth/verify', { withCredentials: true });
         setIsAuthenticated(response.data.authenticated);
       } catch (error) {
         console.log('Auth check failed:', error);
