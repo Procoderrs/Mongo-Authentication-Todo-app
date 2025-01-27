@@ -10,73 +10,59 @@ console.log("Backend URL:", BACKEND_URL);
 // Register function
 export async function register(formData) {
   try {
-    const { email, password } = formData; // Destructure the form data
-    console.log('Payload:', { email, password });
+    const { email, password } = formData; // Destructure form data
+    console.log("Register payload:", { email, password });
 
-    // Make the API call to the backend
-    const res = await fetch(`${BACKEND_URL}/api/user/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        credentials:true
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    // Make a POST request to the register endpoint
+    const response = await axios.post(
+      `${BACKEND_URL}/api/user/register`,
+      { email, password }, // Payload
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true, // Include cookies
+      }
+    );
 
-    const data = await res.json();
-
-    // Check for errors
-    if (!res.ok) {
-      console.log('Backend Error:', data);
-      return { success: null, error: data.error || 'Unknown error occurred' };
-    }
-
-    // Return the response if successful
-    return { success: data, error: null };
+    console.log("Register response:", response.data);
+    return { success: response.data, error: null };
   } catch (error) {
-    console.error('Frontend Error:', error);
-    return { success: null, error: 'Something went wrong. Please try again.' };
+    // Axios automatically provides error details
+    console.error("Register error:", error.response || error.message);
+
+    return {
+      success: null,
+      error: error.response?.data?.error || "Something went wrong. Please try again.",
+    };
   }
 }
 
 // Login function
 export async function login(previousState, formData) {
   try {
-    const { email, password } = formData; // Destructure the form data
-    console.log("Sending request with:", { email, password });
-    
+    const { email, password } = formData; // Destructure form data
+    console.log("Login payload:", { email, password });
 
-    // Make the API call to the backend
-    const res = await fetch(`${BACKEND_URL}/api/user/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include", // Include credentials (cookies)
-      body: JSON.stringify({ email, password }),
-    });
+    // Make a POST request to the login endpoint
+    const response = await axios.post(
+      `${BACKEND_URL}/api/user/login`,
+      { email, password }, // Payload
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true, // Include cookies
+      }
+    );
 
-    // Check if the response is successful
-    if (!res.ok) {
-      const errorResponse = await res.json();
-      console.error("Login failed with status:", res.status, "Error:", errorResponse);
-      return { ...previousState, error: errorResponse?.error || "Something went wrong" };
-    }
+    console.log("Login response:", response.data);
 
-    const data = await res.json();
-    console.log("Login response:", data);
-
-    
-
-    // If there's an error in the response, handle it
-    if (data?.error) {
-      return { ...previousState, error: data.error };
-    }
-
-    // Successful login
-    return { error: null, success: data };
+    // Return successful response
+    return { success: response.data, error: null };
   } catch (error) {
-    console.error("Login request error:", error);
-    return { ...previousState, error: "Something went wrong" };
+    // Log and return detailed error information
+    console.error("Login error:", error.response || error.message);
+
+    return {
+      ...previousState,
+      error: error.response?.data?.error || "Something went wrong. Please try again.",
+    };
   }
 }
