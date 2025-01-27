@@ -10,7 +10,7 @@ router.post('/register', register);
 router.post('/logout', logout);
 
 // Add a route for /auth/verify
-router.get('/verify', verifyToken, (req, res) => {
+/* router.get('/verify', verifyToken, (req, res) => {
   try {
     // If token is valid, respond with user info
     res.status(200).json({
@@ -21,6 +21,6 @@ router.get('/verify', verifyToken, (req, res) => {
     console.error('Verification error:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
-});
+}); */
 
 module.exports = router;
