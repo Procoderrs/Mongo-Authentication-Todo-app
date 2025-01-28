@@ -36,6 +36,10 @@ const Login = () => {
 
       console.log('Login successful, redirecting...');
       navigate('/todos');
+      console.log("Navigation complete!");
+
+      setTimeout(() => setState({ success: null, error: null }), 1000);
+
     }
   }, [state.success, navigate]);
 
@@ -56,6 +60,7 @@ const Login = () => {
     
     if(response.success){
       console.log('login successful, navigating....')
+      navigate('/todos')
     }
     else{
       console.log('login failed',response.error)
