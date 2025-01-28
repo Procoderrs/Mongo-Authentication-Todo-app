@@ -13,14 +13,19 @@ const Login = () => {
   const [state, setState] = useState({ success: null, error: null });
 
   useEffect(() => {
+
+    console.log("useEffect triggered with success:", state.success);
+
     if (state.success) {
       console.log('Login successful, redirecting...');
       console.log('User logged in:', state.success);
       console.log('formdata',formData)
-      setTimeout(() => {
+      console.log('redirecting')
+
+      
         navigate('/todos');
         console.log(state.success);
-      }, 1000);
+     
     }
   }, [state.success, navigate]);
 
