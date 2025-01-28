@@ -74,9 +74,9 @@ console.log('line 109',req.cookies); // Log the cookies to see if the token is t
 
   
 
-res.status(200).json({success:true,token});
+/* res.status(200).json({success:true,token});
 console.log('token',token)
-
+ */
 };
 
 
@@ -91,7 +91,6 @@ const logout = async function (req, res, next) {
   
     secure:process.env.NODE_ENV==='production',
   }).status(200).json({message:'logged out successsfully'})
-  res.send('Logout route');
 };
 
 module.exports = { login, register, logout };

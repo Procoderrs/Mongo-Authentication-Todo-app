@@ -65,7 +65,7 @@ export async function login(previousState, formData) {
     console.log("Login response:", response.data);
 
     // Return successful response
-    return { previousState,success: response.data, error: null };
+    return { success: response.data, error: null };
   } catch (error) {
     // Log and return detailed error information
     console.error("Login error:", error.response || error.message);

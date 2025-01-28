@@ -1,43 +1,30 @@
-import Profile from './components/Profile';
-import { useState,useEffect } from 'react';
+import axios from 'axios'; // Import axios for making HTTP requests
+import Profile from './components/Profile'; // Assuming Profile component is used elsewhere
+import { useState, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'; // Use BrowserRouter here
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Use BrowserRouter here
 import { Navigate } from 'react-router';
 import Login from './components/Login';
 import Register from './components/Register';
+import Todos from './components/Todos'; // Import Todos component here
 
-
-
-
-
+//const LOCAL_URL = "http://localhost:5000";
 
 function App() {
-  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const checkPersistedLogin = async () => {
-      try {
-        const response = await axios.get(`${BACKEND_URL}/api/user/verify`, { withCredentials: true });
-        setUser(response.data);
-      } catch {
-        console.log('Not logged in');
-        setUser(null);
-      }
-    };
-    checkPersistedLogin();
-  }, []);
+  
 
   return (
     <div>
-      <Toaster position="top-center" />
+       <Toaster position="top-center" />
       <Router>
-        <Profile setUser={setUser} /> {/* Pass setUser as a prop */}
-        <Routes>
-          <Route path="/" element={<Navigate to={user ? '/todos' : '/login'} />} />
-          <Route path="/login" element={!user ? <Login /> : <Navigate to="/todos" />} />
-          <Route path="/todos" element={user ? <Todos user={user} /> : <Navigate to="/login" />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/todos" element={<Todos />} />
+        <Route path="/register" element={<Register />} />
+        
+      </Routes>
       </Router>
     </div>
   );

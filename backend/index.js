@@ -14,7 +14,6 @@ dotenv.config();
 
 const corsOptions = {
   origin: [
-    'http://localhost:5000',
     "http://localhost:5173", // Local development URL
     "https://mongo-authentication-todo-app-o9wo.vercel.app",
     "https://mongo-todo-authentication.netlify.app"

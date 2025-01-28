@@ -12,7 +12,7 @@ const Login = () => {
   const [isPending, setIsPending] = useState(false);
   const [state, setState] = useState({ success: null, error: null });
 
-  /* useEffect(() => {
+   useEffect(() => {
 
     console.log("useEffect triggered with success:", state.success);
 
@@ -28,21 +28,15 @@ const Login = () => {
      
     }
   }, [state.success, navigate]);
- */
+ 
   
- useEffect(() => {
-    console.log('state updated',state)
+  /* useEffect(() => {
     if (state.success) {
-
       console.log('Login successful, redirecting...');
       navigate('/todos');
-      console.log("Navigation complete!");
-
-      setTimeout(() => setState({ success: null, error: null }), 1000);
-
     }
   }, [state.success, navigate]);
- 
+ */
 
 
   const handleChange = (event) => {
@@ -54,19 +48,8 @@ const Login = () => {
     console.log("Form submitted with data:", formData);  // Log the data before sending to the backend
     setIsPending(true); // Set loading state
    
-   
     const response = await login(state, formData);  // Pass formData directly
     setState(response); // Update the state based on the response
-    
-    if(response.success){
-      console.log('login successful, navigating....')
-      navigate('/todos')
-    }
-    else{
-      console.log('login failed',response.error)
-    }
-    
-    
     setIsPending(false); // Reset loading state
 
     
