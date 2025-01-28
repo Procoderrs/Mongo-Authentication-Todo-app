@@ -1,6 +1,16 @@
 import Profile from './components/Profile';
 import { useState,useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'; // Use BrowserRouter here
+import { Navigate } from 'react-router';
+import Login from './components/Login';
+import Register from './components/Register';
+
+
+
+
+
+
 function App() {
   const [user, setUser] = useState(null);
 
