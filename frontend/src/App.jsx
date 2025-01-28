@@ -1,6 +1,6 @@
 import Profile from './components/Profile';
 import { useState,useEffect } from 'react';
-
+import { Toaster } from 'react-hot-toast';
 function App() {
   const [user, setUser] = useState(null);
 
