@@ -56,20 +56,18 @@ export async function login(previousState, formData) {
       }
     );
 
-    /* if(response.data){
-      navigation('/todos')
-    } */
-
+    
     console.log("Login response:", response.data);
 
     // Return successful response
-    return { success: response.data, error: null };
+    return { previousState,success: response.data, error: null };
   } catch (error) {
     // Log and return detailed error information
     console.error("Login error:", error.response || error.message);
 
     return {
       ...previousState,
+      success:null,
       error: error.response?.data?.error || "Something went wrong. Please try again.",
     };
   }
