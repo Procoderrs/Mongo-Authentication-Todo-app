@@ -30,7 +30,7 @@ const Login = () => {
   }, [state.success, navigate]);
  */
   
-  /* useEffect(() => {
+ useEffect(() => {
     console.log('state updated',state)
     if (state.success) {
 
@@ -42,11 +42,9 @@ const Login = () => {
 
     }
   }, [state.success, navigate]);
- */
+ 
 
-useEffect(()=>{
-  navigate('/todos')
-},[])
+
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };

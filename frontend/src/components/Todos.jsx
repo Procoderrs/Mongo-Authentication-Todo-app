@@ -9,9 +9,9 @@ import Profile from './Profile';
 
 // Define the local and production URLs
 const LOCAL_URL = "http://localhost:5000";
-const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://mongo-todo-authentication.netlify.app";
+/* const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://mongo-todo-authentication.netlify.app";
 const BACKEND_URL = import.meta.env.MODE === "production" ? VITE_BACKEND_URL : LOCAL_URL;
-
+ */
 // Fetcher function
 const fetcher = async (url, options = {}) => {
   try {
@@ -40,7 +40,7 @@ const fetcher = async (url, options = {}) => {
 };
 
 const Todos = () => {
-  const { data = [], error, mutate, isLoading } = useSWR(`${BACKEND_URL}/api/todos`, fetcher);
+  const { data = [], error, mutate, isLoading } = useSWR(`${LOCAL_URL}/api/todos`, fetcher);
 
   const [currentTodo, setCurrentTodo] = useState('');
   const [editingId, setEditingId] = useState(null);
@@ -69,7 +69,7 @@ const Todos = () => {
       // Update existing todo
       await mutate(
         async () => {
-          const response = await fetcher(`${BACKEND_URL}/api/todos/${editingId}`, {
+          const response = await fetcher(`${LOCAL_URL}/api/todos/${editingId}`, {
             method: 'PUT',
             body: { title: currentTodo },
           });
@@ -103,7 +103,7 @@ const Todos = () => {
 
       async function addTodo() {
         console.log('adding todo',currentTodo)
-        const response = await fetcher(`${BACKEND_URL}/api/todos`, {
+        const response = await fetcher(`${LOCAL_URL}/api/todos`, {
           method: 'POST',
           body: { title: currentTodo },
         });
@@ -131,7 +131,7 @@ const Todos = () => {
     toast.success('Todo deleted');
     await mutate(
       async () => {
-        const response = await fetcher(`${BACKEND_URL}/api/todos/${id}`, {
+        const response = await fetcher(`${LOCAL_URL}/api/todos/${id}`, {
           method: 'DELETE',
         });
         if (response.error) {
@@ -150,7 +150,7 @@ const Todos = () => {
   async function handleCompleteTodo(id, isCompleted) {
     await mutate(
       async () => {
-        const response = await fetcher(`${BACKEND_URL}/api/todos/${id}`, {
+        const response = await fetcher(`${LOCAL_URL}/api/todos/${id}`, {
           method: 'PUT',
           body: { isCompleted: !isCompleted },
         });

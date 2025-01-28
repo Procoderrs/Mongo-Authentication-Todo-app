@@ -2,13 +2,19 @@
 import axios from "axios";
 
 // Define the local and production URLs
-const LOCAL_URL = "http://localhost:5000"; // Local backend URL
+/* const LOCAL_URL = "http://localhost:5000"; // Local backend URL
 const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://mongo-todo-authentication.netlify.app"; // Production backend URL
-
+ */
 // Determine the appropriate URL based on the environment
-const BACKEND_URL = process.env.NODE_ENV === "production" ?  VITE_BACKEND_URL: LOCAL_URL;
+//const BACKEND_URL = process.env.NODE_ENV === "production" ?  VITE_BACKEND_URL: LOCAL_URL;
 
-console.log("Backend URL:", BACKEND_URL);
+//console.log("Backend URL:", BACKEND_URL);
+
+
+
+
+const LOCAL_URL = "http://localhost:5000"; // Local backend URL
+
 
 // Register function
 export async function register(formData) {
@@ -17,8 +23,8 @@ export async function register(formData) {
     console.log("Register payload:", { email, password });
 
     // Make a POST request to the register endpoint
-    const response = await axios.post(
-      `${BACKEND_URL}/api/user/register`,
+   // const response = await axios.post( `${BACKEND_URL}/api/user/register`,
+   const response=await axios.post(`${LOCAL_URL}/api/user/register`,
       { email, password }, // Payload
       {
         headers: { "Content-Type": "application/json" },
@@ -47,8 +53,7 @@ export async function login(previousState, formData) {
     console.log("Login payload:", { email, password });
 
     // Make a POST request to the login endpoint
-    const response = await axios.post(
-      `${BACKEND_URL}/api/user/login`,
+    const response = await axios.post(`${LOCAL_URL}/api/user/login`,
       { email, password }, // Payload
       {
         headers: { "Content-Type": "application/json" },
